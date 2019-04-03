@@ -1,22 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="es">
   <head>
     <meta charset="utf-8">
-    <title></title>
-    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
+    <title>Poua</title>
   </head>
+
   <body>
-    <h1></h1
-    <!-- registrarse-->
-    <section class= "container">
-      <input type="email" id="email" class=" email" placeholder="email"></<input>
-      <input type = "password" id="password" class= "password" placeholder="password"></<input>
-      <button id="btnLogin" class="btnLogin">login</<button>
-      <button id="btnSignUp" class="btnSignUp">Registrarse</<button>
-      <button id="btnLogout" class="btnLogout">Logout</<button>
-    </<section>
-  <script src="./js/auth.js"></script>
-  <script src="./js/form.js"></script>
+    <!--registrarse-->
+    <form class="hide" id="register" data-tab-for="register" onsubmit="return false">
+      <h4>Registro</h4>
+      <input id="emailRegister" class="input" placeholder="Ingresa correo"></input>
+      <input  id="passwordRegister" class= "input" placeholder="Ingresa contraseña"></input>
+      <button id="btnRegister" class="btn">Registrarse</button>
+    </form>
+
+    <!--login-->
+    <form class="hide" id="login" data-tab-for="register" onsubmit="return false">
+      <h4>Inicio de sesión</h4>
+      <input type="email" id="email" class="input" placeholder="Correo"></input>
+      <input type = "password" id="password" class= "input" placeholder="Contraseña"></input>
+      <button id="btnLogin" class="btn">Iniciar</button>
+    </form>
+
+    <!--login-->
+    <section id="content">
+
+    </section>
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+    <script src="./scripts/auth.js"></script>
+    <script src="./scripts/main.js"></script>
 
   </body>
 </html>
