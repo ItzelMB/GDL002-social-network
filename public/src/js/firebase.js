@@ -1,18 +1,18 @@
 import { initRouter } from './changePage.js';
 
-  const inicializa = () => {
+  //const inicializa = () => {
 
     const config = {
-        apiKey: "AIzaSyDLsQLjAYWtZaPcvhuC1MBnWeYf7k3WMcU",
-        authDomain: "redsociallaboratortia.firebaseapp.com",
-        databaseURL: "https://redsociallaboratortia.firebaseio.com",
-        projectId: "redsociallaboratortia",
-        storageBucket: "redsociallaboratortia.appspot.com",
-        messagingSenderId: "97649702787"
-      };
-      firebase.initializeApp(config);
-
+      apiKey: "AIzaSyANXB1QICy5UrOliUFpOzNOBt_2fKyC0_M",
+      authDomain: "poua-8a563.firebaseapp.com",
+      databaseURL: "https://poua-8a563.firebaseio.com",
+      projectId: "poua-8a563",
+      storageBucket: "poua-8a563.appspot.com",
+      messagingSenderId: "777091228447"
+    };
+    firebase.initializeApp(config);
+      
 initRouter();
- };
+ //};
 
- window.addEventListener('load', inicializa);
+ //window.addEventListener('load', inicializa);

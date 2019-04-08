@@ -1,6 +1,13 @@
 import {wall} from './templatePerfil.js';
 
-const db = firebase.firestore();
+
+/*firebase.initializeApp({
+  apiKey: 'AIzaSyANXB1QICy5UrOliUFpOzNOBt_2fKyC0_M',
+  authDomain: 'poua-8a563.firebaseapp.com',
+  projectId: 'poua-8a563',
+});*/
+
+//const db = firebase.firestore();
 
 
 // Inicializar firebase
@@ -8,7 +15,7 @@ export let basePost=()=>{
 	let comment = document.querySelector(".createPost").value;
   let time = new Date();
 
-	db.collection("users").add({ //agrega un ID automatico a cada usuario
+	firebase.firestore().collection("users").add({ //agrega un ID automatico a cada usuario
     comment: comment,
     date: time
 
@@ -43,7 +50,7 @@ export const newpost = () => {
   if (wall()){
 		const visualizationPost = document.querySelector('#visualizationPost');
 		console.log(visualizationPost);
-		db.collection("users").onSnapshot((querySnapshot) => {
+		firebase.firestore().collection("users").orderBy("date","desc").onSnapshot((querySnapshot) => {
 			visualizationPost.innerHTML = '';
 
 			querySnapshot.forEach((doc) => {
@@ -70,18 +77,21 @@ export const newpost = () => {
             </article>
           `;
 
-          db.collection("users").orderBy('date', 'desc');
+          firebase.firestore().collection("users").orderBy('date', 'desc');
 
 
 
 
 						let deleteButtons = document.querySelectorAll('.eliminar');
-							for (var i = 0; i < deleteButtons.length; i++) {
+						deleteButtons.forEach(button => button.addEventListener("click",dlete));
+					/*		
+					for (var i = 0; i < deleteButtons.length; i++) {
 			      		deleteButtons[i].addEventListener('click', function (event) {
 			        		dlete(event.target.id);
 			        				console.log(event.target.id);
 			    			});
-			    }
+					}
+					*/
 					//document.querySelector('.eliminar').addEventListener('click', dlete,false);
 					//let orderPost = () => {
 
@@ -97,9 +107,12 @@ export const newpost = () => {
   }
 };
 
+//Función para eliminar post
 export function dlete(id) {
-db.collection('post')
-	.doc(id)
+let idPost = id.target.parentNode.getAttribute("id");
+console.log(idPost);
+firebase.firestore().collection('users')
+	.doc(idPost)
 	.delete()
 	.then(function () {
 		console.log('Document successfully deleted!');
@@ -107,4 +120,23 @@ db.collection('post')
 	.catch(function (error) {
 		console.error('Error removing document: ', error);
 	});
-}
+};
+
+//Función para editar post
+/*function editPost(id, comment) {
+	document.getElementById("createPost").value = comment;
+
+	const washingtonRef = db.collection("users").doc(id);
+	// Set the "capital" field of the city 'DC'
+	return washingtonRef.update({
+			comment: comment
+		})
+		.then(function () {
+			dlete(id);
+			console.log("Document successfully updated!");
+		})
+		.catch(function (error) {
+			// The document probably doesn't exist.
+			console.error("Error updating document: ", error);
+		});
+}; */
