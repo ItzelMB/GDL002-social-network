@@ -40,6 +40,6 @@ export let loginUser = () => {
 
     btnSignInWithGoogle.addEventListener( 'click', () => {
         logInGoogle();
-     });
-     return formElem;
-  };
+    });
+    return formElem;
+};

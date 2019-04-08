@@ -4,7 +4,6 @@ import{basePost} from './postUser.js';
 export let wall = () => {
   console.log("wal");
     const divElem = document.createElement('div');
-    //divElem.classList.add("section");
     let viewHome = `
 
     <article class="post">
@@ -89,8 +88,6 @@ export let wall = () => {
 
       const btnPost = divElem.querySelector('#public');
 
-      btnPost.addEventListener( 'click', () =>{
-          basePost();
-      });
+      btnPost.addEventListener( 'click', basePost );
       return divElem;
 };

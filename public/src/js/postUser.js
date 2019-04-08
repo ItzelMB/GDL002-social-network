@@ -1,15 +1,5 @@
 import {wall} from './templatePerfil.js';
 
-
-/*firebase.initializeApp({
-  apiKey: 'AIzaSyANXB1QICy5UrOliUFpOzNOBt_2fKyC0_M',
-  authDomain: 'poua-8a563.firebaseapp.com',
-  projectId: 'poua-8a563',
-});*/
-
-//const db = firebase.firestore();
-
-
 // Inicializar firebase
 export let basePost=()=>{
 	let comment = document.querySelector(".createPost").value;
@@ -34,18 +24,6 @@ export let basePost=()=>{
 //Inicializa funcion para mostrar post
 export const newpost = () => {
 
-		/*const dlete = (id)=>{
-			db.collection('users')
-			.doc(id)
-			.delete()
-			.then(function() {
-				console.log("Document successfully deleted!");
-
-				}).catch(function(error) {
-					console.error("Error removing document: ", error);
-				});
-			};*/
-
 //Visualizar template de posts
   if (wall()){
 		const visualizationPost = document.querySelector('#visualizationPost');
@@ -54,63 +32,34 @@ export const newpost = () => {
 			visualizationPost.innerHTML = '';
 
 			querySnapshot.forEach((doc) => {
-				visualizationPost.innerHTML += `
-            <article>
-              <img src=''></img>
-              <h6></h6>
-            </article>
-
+				visualizationPost.innerHTML += ` 
             <article id= "${doc.id}" class="postContainer">
               <h4></h4>
-              <button class="editar" onclick="edit()"><i class="fas fa-pen"></i></button>
-              <button class="eliminar"><i class="fas fa-trash-alt"></i></button>
+              <button class="edit"><i class="fas fa-pen"></i></button>
+              <button class="eliminate"><i class="fas fa-trash-alt"></i></button>
               <p class="postextStyle">${doc.data().comment}</p>
               <img src=''></img>
-              <button><i class="fas fa-heart" style="color #F1C711"></i></button>
-            </article>
-
-            <article>
-              <i></i>
-              <p></p>
-              <p></p>
-              <h6></h6>
+              <button class="like"><i class="fas fa-heart"></i></button>
             </article>
           `;
 
-          firebase.firestore().collection("users").orderBy('date', 'desc');
+					let deleteButtons = document.querySelectorAll('.eliminate');
+					deleteButtons.forEach(button => button.addEventListener('click', function(event){
+						dlete(event);
+					}));
 
-
-
-
-						let deleteButtons = document.querySelectorAll('.eliminar');
-						deleteButtons.forEach(button => button.addEventListener("click",dlete));
-					/*		
-					for (var i = 0; i < deleteButtons.length; i++) {
-			      		deleteButtons[i].addEventListener('click', function (event) {
-			        		dlete(event.target.id);
-			        				console.log(event.target.id);
-			    			});
-					}
-					*/
-					//document.querySelector('.eliminar').addEventListener('click', dlete,false);
-					//let orderPost = () => {
-
-          //}
-
-          //console.log(document.querySelector('.eliminar'));
-          /*document.querySelector('.eliminar').addEventListener('click', () => {dlete(doc.id);
-					});*/
-					//dlete(doc.id));
+					let editButtons = document.querySelectorAll('.edit');
+					editButtons.forEach(button => button.addEventListener('click', function(event){
+							editPost(event);
+					}));
           });
-
         });
   }
 };
 
 //Función para eliminar post
-export function dlete(id) {
-let idPost = id.target.parentNode.getAttribute("id");
-console.log(idPost);
+export const dlete = (e) => {
+let idPost = e.target.parentNode.getAttribute("id");
 firebase.firestore().collection('users')
 	.doc(idPost)
 	.delete()
@@ -123,20 +72,38 @@ firebase.firestore().collection('users')
 };
 
 //Función para editar post
-/*function editPost(id, comment) {
-	document.getElementById("createPost").value = comment;
+export const editPost = (e) => {
+	let idPost = e.target.parentNode.getAttribute("id");
+	let originalText = e.target.parentNode.querySelector('.postextStyle').textContent;
+	let areaText = document.getElementById("createPost");
+	areaText.value = originalText;
 
-	const washingtonRef = db.collection("users").doc(id);
-	// Set the "capital" field of the city 'DC'
-	return washingtonRef.update({
-			comment: comment
+	let buttonEditar = document.getElementById("public");
+	buttonEditar.innerHTML = 'GUARDAR';
+	
+	buttonEditar.removeEventListener('click',basePost);
+
+	//Variable function because it's only temporal for update a post
+	let newUpdateEvent =  function() {
+		let textChanged = areaText.value;
+
+		const idText = firebase.firestore().collection("users").doc(idPost);
+		return idText.update({
+				comment: textChanged
 		})
-		.then(function () {
-			dlete(id);
+		.then(function () {	
+			buttonEditar.removeEventListener('click',newUpdateEvent);
+			areaText.value = '';
+			buttonEditar.innerHTML = 'PUBLICAR';
+			buttonEditar.addEventListener('click',basePost);
 			console.log("Document successfully updated!");
 		})
 		.catch(function (error) {
-			// The document probably doesn't exist.
-			console.error("Error updating document: ", error);
+
+		console.error("Error updating document: ", error);
 		});
-}; */
+	}; 
+
+	buttonEditar.addEventListener('click', newUpdateEvent);
+	
+};

@@ -277,20 +277,62 @@ header nav ul li a:hover {
         background-color: #FF9C08;
 }
 
+.visualizationPost {
+        box-sizing: content-box;
+        background-attachment: scroll;
+        padding-bottom: 100px;
+}
+
 .postContainer {
   width: 75%;
   justify-content: center;
   margin: auto;
+  margin-top: 25px;
   box-sizing: content-box;
   background-color: #FFFFFF;
   padding: 2rem;
 
 }
 
+.controlsContainer {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding-bottom: 20px;
+}
+
 .postextStyle {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   text-align: left;
+}
+
+.eliminate {
+        border: 0;
+        background-color: #F1C711;
+        width: 65px;
+        border-radius: 0.3125rem;
+        text-align: center;
+        float: right;
+        margin: 10px; 
+}
+
+.edit {
+        border: 0;
+        background-color: #F1C711;
+        width: 65px;
+        border-radius: 0.3125rem;
+        text-align: center;
+        float: right;
+        margin: 10px;
+}
+
+.like {
+        border: 0;
+        background-color:#ED007D;
+        border-radius: 0.3125rem;
+        width: 65px;
+        float:left;
+        margin: 10px;
 }
 
 

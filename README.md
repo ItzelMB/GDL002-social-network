@@ -167,7 +167,7 @@ Los prototipos de baja fidelidad nos permitieron plasmar la primera idea del fun
 # Uso e instalación
 Para el uso de la red social no se requiere ningún tipo de instalación, el procedimiento consta únicamente de dirigirse a la siguiente dirección dentro de un navegador:
 
-[Poua](https://www.figma.com/file/TVLgByJxKDzxrvjnqrsBgoh3/prototipo-red-social)
+[Poua](https://itzelmb.github.io/GDL002-social-network/public/index.html)
 
 ## Especificaciones V.1.0
 Se requiere registro del usuario a través de un correo y contraseña o con cuenta de google, una vez hecho el registro se direcciona al usuario a la primera pantalla de muro en donde puede visualizar publicaciones, crear, eliminar y editar las propias.
